@@ -1,4 +1,9 @@
 const openModal = () => {
+  //document.querySelector('h2').innerText = "Novo usuario"
+//document.getElementById('saveValues').innerText = ('salvar');
+
+document.getElementById('saveValues').removeEventListener('click', addUser);
+
   document.getElementById('modal').classList.add('active');
 }
 
@@ -30,6 +35,8 @@ const CapturarValores = () => {
   listaUsuario.push(dadosUsuario);
 
   localStorage.setItem('usuarioCadastrados', JSON.stringify(listaUsuario));
+
+  closeModal();
 
    //document.getElementById('salvar').addEventListener('click', closeModal);
 
@@ -125,41 +132,69 @@ function editarUsuario(userId) {
 
   let listaUsuario = JSON.parse(localStorage.getItem('usuarioCadastrados')) || [];
   const indiceUpdate = listaUsuario.findIndex(usuario => usuario.id.toString() === userId);
-
+ 
   
-
-
 }
 
 document.getElementById('cadastrarUsuario').addEventListener('click', openModal);
 document.getElementById('modalClose').addEventListener('click', closeModal);
 
-function addUser () {
+//function addUser () {
 
-let listUser = []
+//let listUser = []
 
-const nome = document.getElementById('nome').value;
-const email = document.getElementById('E-mail').value;
-const cel = document.getElementById('celular').value;
-const cidade = document.getElementById('cidade').value;
+const id= Math.floor(Math.random()* 100)
+//const nome = document.getElementById('nome').value;
+//const email = document.getElementById('E-mail').value;
+//const cel = document.getElementById('celular').value;
+//const cidade = document.getElementById('cidade').value;
 
-const objUser = {
-  nome: nome,
-  email: email,
-  cel: cel,
-  cidade: cidade,
+
+//const objUser = {
+  idUser : id,
+ // nome: nome,
+ // email: email,
+ //cel: cel,
+ // cidade: cidade,
+//}
+
+//if ( localStorage.getItem('cadastroUsuarios')){
+//listUser = JSON.parse(localStorage.getItem('cadastroUsuarios'));
+//}
+
+//listUser.push(objUser);
+
+//closeModal();
+
+//localStorage.setItem('cadastroUsuarios', JSON.stringify(listUser));
+
+
+
+//}
+
+function UpdateUser(){
+  openModal();
+
+  const textTitleUpdate = document.querySelector('h2');
+  textTitleUpdateUser.innerText = "Atualizar Usuario";
+
+  document.getElementById('saveValues').innerText= 'Atualizar';
+  
+  const getUserData = JSON.parse(localStorage.getItem("CadastroUsuarios"));
+
+  const userData = getUserData.find(identificarUsuario => identificarUsuario.userId === id);
+ document.getElementById("name").value = userData.nomeUser;
+ document.getElementById('email').value = userData.emailUser;
+ document.getElementById('cel').value = userData.celUser;
+ document.getElementById('city').value = userData.cityUser;
+
+ document.getElementById('saveValues').addEventListener('click', UpdateUserInfo);
+  
 }
 
-if ( localStorage.getItem('cadastroUsuarios')){
-listUser = JSON.parse(localStorage.getItem('cadastroUsuarios'));
-}
+//function updateUserInfo(){
+ // const newName = document.getElementById('nome').value;
+ // const newEmail = document.getElementById(email).value;
+ // const newCel = document.getElementById('cel').value;
+//  const newCity = document.getElementById('city').value;
 
-listUser.push(objUser);
-
-closeModal();
-
-localStorage.setItem('cadastroUsuarios', JSON.stringify(listUser));
-
-
-
-}
